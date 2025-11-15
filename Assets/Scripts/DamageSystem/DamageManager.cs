@@ -9,6 +9,8 @@ public class DamageManager : MonoBehaviour
     [SerializeField] private EnemyCharacter enemy;
 
     public EnemyEventSO enemyChanged;
+    public PlayerCurrentEventSO playerSet;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -39,15 +41,22 @@ public class DamageManager : MonoBehaviour
     public void OnEnable()
     {
         enemyChanged.OnEventRaise += SetEnemyCharacter;
+        playerSet.OnEventRaise += SetPlayerCharacter;
     }
 
     private void OnDisable()
     {
         enemyChanged.OnEventRaise -= SetEnemyCharacter;
+        playerSet.OnEventRaise -= SetPlayerCharacter;
     }
 
     void SetEnemyCharacter(EnemyCharacter newEnemy)
     {
         enemy = newEnemy;
+    }
+
+    void SetPlayerCharacter(PlayerCharacter newPlayer)
+    {
+        player = newPlayer;
     }
 }

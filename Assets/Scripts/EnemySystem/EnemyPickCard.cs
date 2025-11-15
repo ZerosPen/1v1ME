@@ -7,6 +7,13 @@ public class EnemyPickCard : MonoBehaviour
     [Header("List of Card")]
     public List<CardSO> cards = new List<CardSO>();
 
+    private CurrentEnemyHandler currentEnemyHandler;
+
+    private void Start()
+    {
+        SetCurrentEnemy();
+    }
+
     public void EnemyPickingCard()
     {
         DeciderManager.instance.SetEnemyCard(RandomPickCard());
@@ -24,5 +31,15 @@ public class EnemyPickCard : MonoBehaviour
 
         CardSO card = cards[randomIndex];
         return card;
+    }
+
+    private void SetCurrentEnemy()
+    {
+        if (currentEnemyHandler == null)
+        {
+            currentEnemyHandler = GameObject.FindGameObjectWithTag("EventEnemyHandler")
+                                            .GetComponent<CurrentEnemyHandler>();
+        }
+        currentEnemyHandler.SetPickUpCardEnemy(this);
     }
 }

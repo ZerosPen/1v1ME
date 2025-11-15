@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeciderManager : MonoBehaviour
@@ -24,7 +23,6 @@ public class DeciderManager : MonoBehaviour
 
     public void TryDeciding()
     {
-        Debug.Log("try to deciding");
         if (playerCard != null && enemyCard != null)
             StartCoroutine(countDownDicidering());
     }

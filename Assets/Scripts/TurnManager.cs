@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private EnemyPickCard _enemyPickCard;
+    public SetPickCardEnemyEventSO setPickCardEnemyEvent;
 
     private void Awake()
     {
@@ -35,5 +36,20 @@ public class TurnManager : MonoBehaviour
     public bool GetTurn()
     {
         return isPlayerTurn;
+    }
+
+    private void OnEnable()
+    {
+        setPickCardEnemyEvent.OnEventRaise += SetEnemyPickUpCard;
+    }
+
+    private void OnDisable()
+    {
+        setPickCardEnemyEvent.OnEventRaise -= SetEnemyPickUpCard;
+    }
+
+    void SetEnemyPickUpCard(EnemyPickCard enemyPickUpCard)
+    {
+        _enemyPickCard = enemyPickUpCard;
     }
 }

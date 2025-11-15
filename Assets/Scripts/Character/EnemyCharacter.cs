@@ -9,8 +9,11 @@ public class EnemyCharacter : Character
     [SerializeField] private Image healthBar;
     [SerializeField] private SpriteRenderer _characterSprite;
     [SerializeField] private HealtPointUI _healPointUI;
-
     [SerializeField] private CurrentEnemyHandler currentEnemyHandler;
+
+
+    [Header("Event")]
+    public OnKillEnemyEventSO OnKillEnemyEvent;
 
     private void Start()
     {
@@ -31,8 +34,13 @@ public class EnemyCharacter : Character
 
     public override void DealDamage(Character target)
     {
-        Debug.Log($"{nameCharacter} is dealing {dealDamage} damage to enemy");
-        target.TakeDamage(dealDamage);
+        Debug.Log("DealDamage called with: " + dealDamage);
+        target.TakeDamage(dealDamage/2);
+    }
+
+    public override void OnDeath()
+    {
+        BattleManager.instance.OnkilledEnemy();
     }
 
     private void SetCurrentEnemy()

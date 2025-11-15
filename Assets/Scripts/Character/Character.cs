@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : Entity, IDamageable
 {
     [Header("Status")]
+    [SerializeField] private bool isDead;
     public float maxHealtPoint;
     [SerializeField] private bool isPickUpCard;
 
@@ -19,11 +20,17 @@ public class Character : Entity, IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("get Called!");
+        Debug.Log("TakeDamage called with: " + damage);
         healtPoints -= damage;
         if (healtPoints <= 0)
         {
             Debug.Log($"{nameCharacter} is dead!");
+            OnDeath();
         }
+    }
+
+    public virtual void OnDeath()
+    {
+
     }
 }
