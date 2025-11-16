@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    [Header("Status")]
-    [SerializeField] private bool isShowDownCard;
 
     [Header("References")]
     public GameObject ReadyOrCancelButton;
     public GameObject ShowDownPanel;
+    public GameObject LosePanel;
 
     [Header("Events")]
     public HideShowReadyButtonEventSO HideShowReadyButtonEvent;
+    public OnStartShowDownEventSO OnStartShowDownEvent;
+    public OnEndShowDownEventSO onEndShowDownEvent;
+    public OnStartAnimationEventSO onStartAnimationEvent;
+    public OnShowLosePanelEventSO onShowLosePanelEvent;
+    public OnHideLosePanelEventSO onHideLosePanelEvent;
+    public OnPlayerKilledSO onPlayerKilledEvent;
 
     private void Awake()
     {
@@ -25,10 +31,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void HideOrShowDownCard(bool isShow)
+    private void ShowLosePanel()
     {
-        ShowDownPanel.SetActive(isShow);
-        isShowDownCard = isShow;
+        LosePanel.SetActive(true);
+        onShowLosePanelEvent.Riase();
+    }
+
+    private void HideLosePanel()
+    {
+        LosePanel.SetActive(false);
+    }
+
+    private void ShowDownCard()
+    {
+        ShowDownPanel.SetActive(true);
+        onStartAnimationEvent.Raise();
+    }
+
+    private void HideShowDownCard()
+    {
+        ShowDownPanel.SetActive(false);
     }
 
     public void HideOrShowReadyButton(bool isShow)
@@ -38,11 +60,19 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        HideShowReadyButtonEvent.OnRaiseEvent += HideOrShowReadyButton;
+        HideShowReadyButtonEvent.OnRaiseEvent  += HideOrShowReadyButton;
+        OnStartShowDownEvent.OnRaiseEvent      += ShowDownCard;
+        onEndShowDownEvent.OnRaiseEvent        += HideShowDownCard;
+        onHideLosePanelEvent.OnRaiseEvent      += HideLosePanel;
+        onPlayerKilledEvent.OnRaiseEvent       += ShowLosePanel;
     }
 
     private void OnDisable()
     {
-        HideShowReadyButtonEvent.OnRaiseEvent -= HideOrShowReadyButton;
+        HideShowReadyButtonEvent.OnRaiseEvent   -= HideOrShowReadyButton;
+        OnStartShowDownEvent.OnRaiseEvent       -= ShowDownCard;
+        onEndShowDownEvent.OnRaiseEvent         -= HideShowDownCard;
+        onHideLosePanelEvent.OnRaiseEvent       -= HideLosePanel;
+        onPlayerKilledEvent.OnRaiseEvent        -= ShowLosePanel;
     }
 }

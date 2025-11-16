@@ -8,6 +8,7 @@ public class PlayerCharacter : Character
     [SerializeField] private CharacterSO characterdata;
 
     [Header("References")]
+    [SerializeField] private PlayerAnimation _PA;
     [SerializeField] private Image healthBar;
     [SerializeField] private SpriteRenderer _characterSprite;
     [SerializeField] private HealtPointUI _healPointUI;
@@ -15,6 +16,7 @@ public class PlayerCharacter : Character
 
     [Header("Events")]
     public SetPlayerCardEventSO setPlayerCardEvent;
+    public OnPlayerKilledSO OnPlayerKilled;
 
     private void Start()
     {
@@ -23,6 +25,15 @@ public class PlayerCharacter : Character
         healtPoints   = characterdata.healtPointCharacter;
         dealDamage    = characterdata.dealDamageCharacter;
         //_characterSprite.sprite = characterdata.spriteCharacter;
+
+        if (_PA == null)
+        {
+            GameObject p = GameObject.FindWithTag("PlayerAnimation");
+            if (p != null)
+            {
+                _PA = p.GetComponent<PlayerAnimation>();
+            }
+        }
 
         SetCurrentPlayer();
     }
@@ -41,7 +52,8 @@ public class PlayerCharacter : Character
 
     public override void OnDeath()
     {
-        
+        OnPlayerKilled.Riase();
+        _PA.PlayDeadAnimation();
     }
 
     private void SetCurrentPlayer()

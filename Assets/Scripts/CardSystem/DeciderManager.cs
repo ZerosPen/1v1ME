@@ -35,7 +35,7 @@ public class DeciderManager : MonoBehaviour
         {
             battleTriggered = true;
             //Debug.Log($"[Decider] battleTriggered={battleTriggered}");
-            BattleManager.instance.BattleStart();
+            BattleManager.instance.BattleStart(playerCard, enemyCard);
         }
             
     }

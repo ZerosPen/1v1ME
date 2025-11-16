@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0d5758d36058a458f68f179d22c97f, type: 3}
   m_Name: Crow
   m_EditorClassIdentifier: 
-  nameCharacter: Crow Slayer
+  nameCharacter: Crow
   spriteCharacter: {fileID: 0}
   healtPointCharacter: 100
   dealDamageCharacter: 10

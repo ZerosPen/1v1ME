@@ -8,6 +8,14 @@ public class CardUI : MonoBehaviour
 
     public void ChangeCardUI(CardSO card)
     {
-        cardImage.sprite = card.cardSprite;
+       if (card != null)
+        {
+            cardImage.sprite = card.cardSprite;
+        }
+    }
+
+    public void ResetCardImageUI()
+    {
+        cardImage.sprite = null;
     }
 }

@@ -6,11 +6,21 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager instance;
 
+    [Header("Status")]
+    [SerializeField] private int killedEnemy;
+    [SerializeField] private string winner;
+    [SerializeField] private CardSO _playerCard;
+    [SerializeField] private CardSO _enemyCard;
+    [SerializeField] private int BestScore;
+
     [Header("Events")]
     public OnKillEnemyEventSO onKilledEnemyEvent;
     public EndBattleEventSO endBattleEvent;
-
-    [SerializeField] private int killedEnemy;
+    public OnStartShowDownEventSO onStartShowDownEvent;
+    public OnEndShowDownEventSO onEndShowDownEventSO;
+    public OnChangeWinnerEventSO onChangeWinnerEvent;
+    public OnTriggerAttackPlayerEventSO onTriggerAttackPlayerEvent;
+    public OnTriggerAttackEnemyEventSO onTriggerAttackEnemyEvent;
 
     private void Awake()
     {
@@ -22,32 +32,65 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void BattleStart()
+    public void BattleStart(CardSO playerCard, CardSO enemyCard)
     {
-        string winner = DeciderManager.instance.DicideringCard();
-        //Debug.Log($"[BattleManager] Winner = {winner}");
+        winner = DeciderManager.instance.DicideringCard();
+        _playerCard = playerCard;
+        _enemyCard = enemyCard;
+        onStartShowDownEvent.Raise();
+    }
 
+    public void DoBattle()
+    {
         if (winner != null)
         {
             DamageManager.instance.GetDealingDamage(winner);
         }
+        _playerCard = _enemyCard = null;
+        winner = null;
+
         endBattleEvent.Raise();
+    }
+
+    private void ShowWinner()
+    {
+        onChangeWinnerEvent.Raise(winner, _playerCard, _enemyCard);
+        // 2) Wait then finish
+        StartCoroutine(ShowWinnerDelay());
+    }
+
+    private IEnumerator ShowWinnerDelay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        UIManager.instance.onEndShowDownEvent.Raise();
+
+        if (winner == "player")
+            onTriggerAttackPlayerEvent.Raise();
+        else
+            onTriggerAttackEnemyEvent.Raise();
+
+        yield return new WaitForSeconds(0.2f);
+
+        DoBattle();
     }
 
     public void OnkilledEnemy()
     {
         killedEnemy++;
-        ScoreManager.instance.AddScore(100);
+        ScoreManager.instance.AddScore(BestScore);
     }
 
     private void OnEnable()
     {
-        onKilledEnemyEvent.OnRaiseEvent += OnkilledEnemy;
+        onKilledEnemyEvent.OnRaiseEvent  += OnkilledEnemy;
+        AnimationManager.instance.OnAllAnimationsDone += ShowWinner;
     }
 
     private void OnDisable()
     {
-        onKilledEnemyEvent.OnRaiseEvent -= OnkilledEnemy;
+        onKilledEnemyEvent.OnRaiseEvent  -= OnkilledEnemy;
+        AnimationManager.instance.OnAllAnimationsDone -= ShowWinner;
     }
 
 }

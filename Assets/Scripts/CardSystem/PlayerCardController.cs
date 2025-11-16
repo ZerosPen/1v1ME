@@ -10,10 +10,12 @@ public class PlayerCardController : MonoBehaviour
     public SetPlayerCardEventSO setPlayerCardEvent;
     public CanPickUpCardEventSO canPickUpCardEvent;
     public EndBattleEventSO endBattleEvent;
+    public OnChangeCardEventSO onChangeCardEvent;
 
     public void LockPlayerCard()
     {
         DeciderManager.instance.SetPlayerCard(card);
+        onChangeCardEvent.Raise(card.cardName.ToLower(), 1);
     }
 
     private void SetPlayerCardController(CardSO newCard)

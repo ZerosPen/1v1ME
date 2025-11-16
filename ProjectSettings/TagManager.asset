@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EventEnemyHandler
   - EventPLayerHandler
+  - PlayerAnimation
   layers:
   - Default
   - TransparentFX
