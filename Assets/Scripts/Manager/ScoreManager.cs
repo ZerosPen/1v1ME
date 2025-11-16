@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
 
     public void InitializeScoreUI()
     {
-        changeScoreEvent.Raise(score);
+        changeScoreEvent.Raise(score, bestScore);
         bestBestScoreEvent.Raise(bestScore);
     }
 
@@ -42,6 +42,6 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScoreUI()
     {
-        changeScoreEvent.Raise(score);
+        changeScoreEvent.Raise(score, bestScore);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class DamageManager : MonoBehaviour
 {
@@ -20,21 +21,25 @@ public class DamageManager : MonoBehaviour
         }
     }
 
+    //Caclute Damage
     public void GetDealingDamage(string winner)
     {
-        if (player == null || enemy == null)
-            return;
-        
-        if (winner != null)
+       // Debug.Log($"[DamageManager] target = {winner}");
+        if (winner == null) 
         {
-            if (winner.ToLower() == "player")
-            {
-                player.DealDamage(enemy);
-            }
-            else
-            {
-                enemy.DealDamage(player);
-            }
+            Debug.LogWarning("Target in Damage manager is empty!");
+            return; 
+        }
+
+        //Debug.Log($"[DamageManager] DealDamage called by {winner}");
+
+        if (winner.ToLower() == "player")
+        {
+            player.DealDamage(enemy);
+        }
+        else
+        {
+            enemy.DealDamage(player);
         }
     }
 

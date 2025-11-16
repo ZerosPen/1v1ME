@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class scoreUI : MonoBehaviour
 {
@@ -16,9 +15,14 @@ public class scoreUI : MonoBehaviour
         bestScoreText.text = "BestScore : " + bestScore.ToString("D5");
     }
 
-    public void UpdateScore(int score)
+    public void UpdateScore(int score, int bestScore)
     {
         scoreText.text = "Score : " + score.ToString();
+        if (score > bestScore)
+        {
+            bestScoreText.text = "BestScore : " + bestScore.ToString("D5");
+        }
+        
     }
 
     private void OnEnable()

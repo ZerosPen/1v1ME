@@ -13,6 +13,9 @@ public class PlayerCharacter : Character
     [SerializeField] private HealtPointUI _healPointUI;
     [SerializeField] private CurrentPlayerHandler currentPlayerHandler;
 
+    [Header("Events")]
+    public SetPlayerCardEventSO setPlayerCardEvent;
+
     private void Start()
     {
         maxHealtPoint = characterdata.healtPointCharacter;
@@ -32,8 +35,8 @@ public class PlayerCharacter : Character
 
     public override void DealDamage(Character target)
     {
-        Debug.Log("DealDamage called with: " + dealDamage);
-        target.TakeDamage(dealDamage/2);
+        Debug.Log($"{nameCharacter} is dealing {dealDamage} damage to {target.nameCharacter}");
+        target.TakeDamage(dealDamage);
     }
 
     public override void OnDeath()

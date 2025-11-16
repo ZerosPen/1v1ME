@@ -5,9 +5,13 @@ public class DeciderManager : MonoBehaviour
 {
     public static DeciderManager instance;
     public DiciderCard diciderCard;
+    [SerializeField] private bool battleTriggered;
 
-    [SerializeField] private CardSO playerCard;
-    [SerializeField] private CardSO enemyCard;
+    private CardSO playerCard;
+    private CardSO enemyCard;
+
+    [Header("Events")]
+    public EndBattleEventSO endBattleEvent;
 
     private void Awake()
     {
@@ -21,13 +25,22 @@ public class DeciderManager : MonoBehaviour
         }
     }
 
-    public void TryDeciding()
+    private void PlayerandEnemyHaveCard()
     {
+        if (battleTriggered)
+            return;
+
+        //Debug.Log($"[Decider] playerCard={playerCard != null}, enemyCard={enemyCard != null}");
         if (playerCard != null && enemyCard != null)
-            StartCoroutine(countDownDicidering());
+        {
+            battleTriggered = true;
+            //Debug.Log($"[Decider] battleTriggered={battleTriggered}");
+            BattleManager.instance.BattleStart();
+        }
+            
     }
 
-    private void DicideringCard()
+    public string DicideringCard()
     {
         string winnerCard = diciderCard.GetDeciderCard(playerCard, enemyCard);
         string winner = null;
@@ -48,33 +61,36 @@ public class DeciderManager : MonoBehaviour
             Debug.Log($"Enemy are the winnerCard because {enemyCard.cardName} is beat {playerCard.cardName}");
             winner = "enemy";
         }
-        DamageManager.instance.GetDealingDamage(winner);
-        StartCoroutine(DelayDefaulting());
+        return winner;
     }
 
     public void SetPlayerCard(CardSO card)
     {
         playerCard = card;
         TurnManager.instance.ChangeTurn();
-        TryDeciding();
+        PlayerandEnemyHaveCard();
     }
 
     public void SetEnemyCard(CardSO card)
     {
         enemyCard = card;
         TurnManager.instance.ChangeTurn();
-        TryDeciding();
+        PlayerandEnemyHaveCard();
     }
 
-    private IEnumerator DelayDefaulting()
+    private void DelayDefaulting()
     {
-        yield return new WaitForSeconds(1f);
         playerCard = enemyCard = null;
+        battleTriggered = false;
     }
 
-    public IEnumerator countDownDicidering()
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(1f);
-        DicideringCard();
+        endBattleEvent.OnRaiseEvent += DelayDefaulting;
+    }
+
+    private void OnDisable()
+    {
+        endBattleEvent.OnRaiseEvent -= DelayDefaulting;
     }
 }

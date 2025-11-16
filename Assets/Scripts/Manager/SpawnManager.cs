@@ -12,6 +12,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject playerPrefab;
     public RandomizerEnemySpawned randomizerEnemySpawned;
 
+    [Header("Events")]
+    public OnKillEnemyEventSO OnKillEnemyEvent;
+
     private void Awake()
     {
         if (instance == null)
@@ -36,5 +39,15 @@ public class SpawnManager : MonoBehaviour
     public void PlayerSpwaner()
     {
         GameObject.Instantiate(playerPrefab, pointPlayerSpawn.position, Quaternion.identity);
+    }
+
+    private void OnEnable()
+    {
+        OnKillEnemyEvent.OnRaiseEvent += EnemySpawner;
+    }
+
+    private void OnDisable()
+    {
+        OnKillEnemyEvent.OnRaiseEvent -= EnemySpawner;
     }
 }

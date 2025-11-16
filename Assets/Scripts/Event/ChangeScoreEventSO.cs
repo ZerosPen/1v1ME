@@ -4,10 +4,10 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Events/Change score Event")]
 public class ChangeScoreEventSO : ScriptableObject
 {
-    public UnityAction<int> OnEventRaise;
+    public UnityAction<int, int> OnEventRaise;
     
-    public void Raise(int score)
+    public void Raise(int score, int bestScore)
     {
-        OnEventRaise?.Invoke(score);
+        OnEventRaise?.Invoke(score, bestScore);
     }
 }

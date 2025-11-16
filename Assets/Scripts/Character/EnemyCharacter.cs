@@ -10,7 +10,7 @@ public class EnemyCharacter : Character
     [SerializeField] private SpriteRenderer _characterSprite;
     [SerializeField] private HealtPointUI _healPointUI;
     [SerializeField] private CurrentEnemyHandler currentEnemyHandler;
-
+    
 
     [Header("Event")]
     public OnKillEnemyEventSO OnKillEnemyEvent;
@@ -34,13 +34,21 @@ public class EnemyCharacter : Character
 
     public override void DealDamage(Character target)
     {
-        Debug.Log("DealDamage called with: " + dealDamage);
-        target.TakeDamage(dealDamage/2);
+        Debug.Log($"{nameCharacter} is dealing {dealDamage} damage to {target.nameCharacter}");
+        target.TakeDamage(dealDamage);
     }
 
     public override void OnDeath()
     {
-        BattleManager.instance.OnkilledEnemy();
+        if (currentEnemyHandler == null)
+        {
+            SetCurrentEnemy();
+        }
+        else
+        {
+            currentEnemyHandler.SetEnemyKillEventChannel();
+            Destroy(gameObject);
+        }
     }
 
     private void SetCurrentEnemy()
@@ -51,5 +59,10 @@ public class EnemyCharacter : Character
                                             .GetComponent<CurrentEnemyHandler>();
         }
         currentEnemyHandler.SetEnemy(this);
+        
+        if (GetIsDeadCharacter())
+        {
+            OnDeath();
+        }
     }
 }

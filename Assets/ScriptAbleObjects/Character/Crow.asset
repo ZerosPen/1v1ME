@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameCharacter: Crow Slayer
   spriteCharacter: {fileID: 0}
-  healtPointCharacter: 10
+  healtPointCharacter: 100
   dealDamageCharacter: 10

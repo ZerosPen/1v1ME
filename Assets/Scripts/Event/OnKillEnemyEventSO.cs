@@ -4,7 +4,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Events/On Killed Enemy Event")]
 public class OnKillEnemyEventSO : ScriptableObject
 {
-    public UnityEvent OnRaiseEvent;
+    public UnityAction OnRaiseEvent;
 
     public void Raise()
     {

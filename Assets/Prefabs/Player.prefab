@@ -303,9 +303,12 @@ MonoBehaviour:
   nameCharacter: 
   dealDamage: 0
   characterdata: {fileID: 11400000, guid: 4e69c4c5f26e6844d922985c1e6d2de7, type: 2}
+  card: {fileID: 0}
   healthBar: {fileID: 1136141645806709641}
   _characterSprite: {fileID: 249216070148279914}
   _healPointUI: {fileID: 6168437126831390594}
+  currentPlayerHandler: {fileID: 0}
+  setPlayerCardEvent: {fileID: 11400000, guid: 8cc1290e80796ae40bb2fc124f310dca, type: 2}
 --- !u!1 &7965238293115316922
 GameObject:
   m_ObjectHideFlags: 0

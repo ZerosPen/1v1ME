@@ -25,8 +25,14 @@ public class Character : Entity, IDamageable
         if (healtPoints <= 0)
         {
             Debug.Log($"{nameCharacter} is dead!");
+            isDead = true;
             OnDeath();
         }
+    }
+    
+    public bool GetIsDeadCharacter()
+    {
+        return isDead;
     }
 
     public virtual void OnDeath()
