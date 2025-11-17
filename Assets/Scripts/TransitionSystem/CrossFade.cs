@@ -6,7 +6,7 @@ public class CrossFade : SceneTransition
 {
     public CanvasGroup cg;
 
-    public override IEnumerator AnimatorTransitionIn()
+    public override IEnumerator AnimateTransitionIn()
     {
         var tweener = cg.DOFade(1f, 1f);
         yield return tweener.WaitForCompletion();

@@ -31,19 +31,17 @@ public class LevelManager : MonoBehaviour
 
     public void LoadScene(string sceneName, string transitionName)
     {
-        Debug.Log($"sceneName {sceneName} transitionName : {transitionName}");
         StartCoroutine(LoadSceneAsync(sceneName, transitionName));
     }
 
     private IEnumerator LoadSceneAsync(string sceneName, string transitionName)
     {
-        SceneTransition transition = transitions.First(t => t.name == sceneName);
-
+        SceneTransition transition = transitions.First(t => t.name == transitionName);
 
         AsyncOperation scene = SceneManager.LoadSceneAsync(sceneName);
         scene.allowSceneActivation = false;
 
-        yield return transition.AnimatorTransitionIn();
+        yield return transition.AnimateTransitionIn();
 
         ProgressBar.gameObject.SetActive(true);
 
@@ -53,7 +51,10 @@ public class LevelManager : MonoBehaviour
             yield return null;
         } while (scene.progress < 0.9f);
 
+        yield return new WaitForSeconds(1f);
+
         scene.allowSceneActivation = true;
+
         ProgressBar.gameObject.SetActive(false);
 
         yield return transition.AnimatorTransitionOut();

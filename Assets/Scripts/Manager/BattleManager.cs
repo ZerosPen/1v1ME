@@ -21,6 +21,8 @@ public class BattleManager : MonoBehaviour
     public OnChangeWinnerEventSO onChangeWinnerEvent;
     public OnTriggerAttackPlayerEventSO onTriggerAttackPlayerEvent;
     public OnTriggerAttackEnemyEventSO onTriggerAttackEnemyEvent;
+    public OnSendKilledCountEventSO onSendKilledCountEvent;
+    public OnGetStatusEventSO onGetStatusEvent;
 
     private void Awake()
     {
@@ -57,6 +59,11 @@ public class BattleManager : MonoBehaviour
         endBattleEvent.Raise();
     }
 
+    private void CountKilled()
+    {
+        onSendKilledCountEvent.Raise(killedEnemy);
+    }
+
     private void ShowWinner()
     {
         onChangeWinnerEvent.Raise(winner, _playerCard, _enemyCard);
@@ -72,7 +79,7 @@ public class BattleManager : MonoBehaviour
 
         if (winner == "player")
             onTriggerAttackPlayerEvent.Raise();
-        else
+        else if (winner == "enemy")
             onTriggerAttackEnemyEvent.Raise();
 
         yield return new WaitForSeconds(0.2f);
@@ -90,12 +97,14 @@ public class BattleManager : MonoBehaviour
     {
         onKilledEnemyEvent.OnRaiseEvent  += OnkilledEnemy;
         AnimationManager.instance.OnAllAnimationsDone += ShowWinner;
+        onGetStatusEvent.OnRaiseEvent += CountKilled;
     }
 
     private void OnDisable()
     {
         onKilledEnemyEvent.OnRaiseEvent  -= OnkilledEnemy;
         AnimationManager.instance.OnAllAnimationsDone -= ShowWinner;
+        onGetStatusEvent.OnRaiseEvent -= CountKilled;
     }
 
 }

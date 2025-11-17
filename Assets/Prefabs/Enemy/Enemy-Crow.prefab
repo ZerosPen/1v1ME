@@ -174,7 +174,7 @@ MonoBehaviour:
   _characterSprite: {fileID: 6375414313445238780}
   _healPointUI: {fileID: 6182533670831112452}
   currentEnemyHandler: {fileID: 0}
-  OnKillEnemyEvent: {fileID: 0}
+  OnKillEnemyEvent: {fileID: 11400000, guid: 78e039c0d0bd5e44d8e582b765b436c2, type: 2}
 --- !u!1 &2166702006740629361
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,8 +443,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6826233631002380245}
   - component: {fileID: 6375414313445238780}
+  - component: {fileID: 6058567490500036002}
+  - component: {fileID: 3910527963726005959}
   m_Layer: 0
-  m_Name: CharacterDisplay
+  m_Name: Enemy -CharacterDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 7031826253456538386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -517,3 +519,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6058567490500036002
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031826253456538386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23f6650054c486845b83af190f8aacf6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3910527963726005959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031826253456538386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40eab82f4aca87f4da700d6316dab6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6058567490500036002}
+  onTriggerAttackEnemyEvent: {fileID: 11400000, guid: b783173538167c746b45cccaaf9983b2, type: 2}
+  OnKillEnemyEvent: {fileID: 11400000, guid: 78e039c0d0bd5e44d8e582b765b436c2, type: 2}

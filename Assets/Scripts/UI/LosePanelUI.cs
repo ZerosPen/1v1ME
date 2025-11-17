@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class LosePanelUI : MonoBehaviour
 {
@@ -9,10 +10,17 @@ public class LosePanelUI : MonoBehaviour
 
     [Header("Refence")]
     [SerializeField] private CanvasGroup _cg;
+    public TextMeshProUGUI actioCard;
+    public TextMeshProUGUI score;
+    public TextMeshProUGUI killedEnemy;
+
 
     [Header("Events")]
     public OnShowLosePanelEventSO onShowLosePanelEvent;
-    public OnHideLosePanelEventSO onHideLosePanelEvent;
+    public OnGetStatusEventSO onGetStatusEvent;
+    public OnSendKilledCountEventSO onSendKilledCountEvent;
+    public OnSendScoreEventSO onSendScoreEvent;
+    public OnSendUseCardEventSO onSendUseCardEvent;
 
     private Tween DG;
 
@@ -23,7 +31,8 @@ public class LosePanelUI : MonoBehaviour
 
         _cg.alpha = 0;
 
-        DG = _cg.DOFade(1f, timeFadingIn).SetEase(Ease.OutQuad);
+        DG = _cg.DOFade(1f, timeFadingIn).SetEase(Ease.OutQuad)
+            .OnComplete(() => onGetStatusEvent.Raise());
     }
 
     public void FadeOutPanel()
@@ -32,17 +41,35 @@ public class LosePanelUI : MonoBehaviour
             _cg = GetComponent<CanvasGroup>();
 
         DG = _cg.DOFade(0f, timeFadingOut)
-            .SetEase(Ease.InQuad)
-            .OnComplete(() => onHideLosePanelEvent.Riase());
+            .SetEase(Ease.InQuad);
+    }
+
+    public void UpdateCardUseUI(int cardUse)
+    {
+        actioCard.text = cardUse.ToString();
+    }
+    public void UpdateScorePlayerUI(int scorePlayer)
+    {
+        score.text = scorePlayer.ToString();
+    }
+    public void UpdatekilledEnemyUI(int killed)
+    {
+        killedEnemy.text = killed.ToString();
     }
 
     private void OnEnable()
     {
         onShowLosePanelEvent.OnRaiseEvent += FadeInPanel;
+        onSendKilledCountEvent.OnRaiseEvent += UpdatekilledEnemyUI;
+        onSendScoreEvent.OnRaiseEvent += UpdateScorePlayerUI;
+        onSendUseCardEvent.OnRaiseEvent += UpdateCardUseUI;
     }
 
     private void OnDisable()
     {
         onShowLosePanelEvent.OnRaiseEvent -= FadeInPanel;
+        onSendKilledCountEvent.OnRaiseEvent -= UpdatekilledEnemyUI;
+        onSendScoreEvent.OnRaiseEvent -= UpdateScorePlayerUI;
+        onSendUseCardEvent.OnRaiseEvent -= UpdateCardUseUI;
     }
 }

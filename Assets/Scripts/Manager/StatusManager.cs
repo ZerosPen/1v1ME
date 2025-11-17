@@ -11,11 +11,14 @@ public class StatusManager : MonoBehaviour
     [SerializeField] private int _BatKilled;
     [SerializeField] private int _CrowKilled;
     [SerializeField] private int _enemyKilled;
+    [SerializeField] private int _countCard;
 
     [Header("Events")]
     //public OnUpdateChangeKilledEnemyEventSO OnUpdateChangeKilledEnemyEvent;
     public OnUpdateUseCardEventSO OnUpdateUseCardEvent;
     public OnChangeCardEventSO OnChangeCardEvent;
+    public OnSendUseCardEventSO OnSendUseCardEvent;
+    public OnGetStatusEventSO onGetStatusEvent;
 
     private void Awake()
     {
@@ -46,6 +49,12 @@ public class StatusManager : MonoBehaviour
             _ScissorsUsed += value;
             OnUpdateUseCardEvent.Raise(cardName.ToLower(), _ScissorsUsed);
         }
+        _countCard++;
+    }
+
+    private void CountUseCard()
+    {
+        OnSendUseCardEvent.Raise(_countCard);
     }
 
     /*public void UpdateKilledEnemyUI(string enemyName, int value)
@@ -68,12 +77,13 @@ public class StatusManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OnChangeCardEvent.OnRaiseEvent += UpdateUseCardUI;
+        OnChangeCardEvent.OnRaiseEvent  += UpdateUseCardUI;
+        onGetStatusEvent.OnRaiseEvent   += CountUseCard;
     }
 
     private void OnDisable()
     {
-        OnChangeCardEvent.OnRaiseEvent -= UpdateUseCardUI;
-
+        OnChangeCardEvent.OnRaiseEvent  -= UpdateUseCardUI;
+        onGetStatusEvent.OnRaiseEvent   -= CountUseCard;
     }
 }

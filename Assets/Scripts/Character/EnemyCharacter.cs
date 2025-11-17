@@ -47,6 +47,7 @@ public class EnemyCharacter : Character
         else
         {
             currentEnemyHandler.SetEnemyKillEventChannel();
+            OnKillEnemyEvent.Raise();
             Destroy(gameObject);
         }
     }

@@ -14,7 +14,8 @@ public class ScoreManager : MonoBehaviour
     public ChangeScoreEventSO changeScoreEvent;
     public ChangeBestScoreEventSO bestBestScoreEvent;
     public OnShowLosePanelEventSO onShowLosePanelEvent;
-
+    public OnSendScoreEventSO onSendScoreEvent;
+    public OnGetStatusEventSO onGetStatusEvent;
 
     private void Awake()
     {
@@ -56,6 +57,11 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Save score : " + score);
     }
 
+    private void CountScore()
+    {
+        onSendScoreEvent.Raise(score);
+    }
+
     public void Load(BestScoreSaveData data)
     {
         _bestScore = data.bestScore;
@@ -76,11 +82,13 @@ public class ScoreManager : MonoBehaviour
     private void OnEnable()
     {
         onShowLosePanelEvent.OnRaiseEvent += CallToSaveBestScore;
+        onGetStatusEvent.OnRaiseEvent += CountScore;
     }
 
     private void OnDisable()
     {
         onShowLosePanelEvent.OnRaiseEvent -= CallToSaveBestScore;
+        onGetStatusEvent.OnRaiseEvent -= CountScore;
     }
 }
 

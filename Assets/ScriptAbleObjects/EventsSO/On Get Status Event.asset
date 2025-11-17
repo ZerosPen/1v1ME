@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0d5758d36058a458f68f179d22c97f, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 1f8c0fc47996bb64e95b9f19381f2082, type: 3}
+  m_Name: On Get Status Event
   m_EditorClassIdentifier: 
-  nameCharacter: Player
-  spriteCharacter: {fileID: 0}
-  healtPointCharacter: 100
-  dealDamageCharacter: 10

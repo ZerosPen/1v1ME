@@ -67,6 +67,17 @@ public class PauseUI : MonoBehaviour
         isPauseOpen = false;
     }
 
+    public void BackToMainMenu()
+    {
+        LevelManager.instance.LoadScene("MainMenu", "CrossFade");
+        SaveSystem.Save();
+    }
+
+    public void RetryGame()
+    {
+        LevelManager.instance.LoadScene("Game", "CrossFade");
+    }
+
     private void OnEnable()
     {
         OnShowPauseEvent.OnRaiseEvent += DecidePause;
