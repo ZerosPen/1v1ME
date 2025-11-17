@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameCharacter: Player
   spriteCharacter: {fileID: 0}
-  healtPointCharacter: 100
+  healtPointCharacter: 10
   dealDamageCharacter: 10

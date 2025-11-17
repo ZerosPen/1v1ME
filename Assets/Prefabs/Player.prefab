@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   onTriggerAttackPlayerEvent: {fileID: 11400000, guid: 976523496c1b726448563e02b577d7a6, type: 2}
+  onPlayerKilledEvent: {fileID: 11400000, guid: e8744d3b595787e4ba334e0a46cc8ebe, type: 2}
 --- !u!95 &3397389273637765551
 Animator:
   serializedVersion: 5

@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void ShowLosePanel()
+    public void ShowLosePanel()
     {
         LosePanel.SetActive(true);
         onShowLosePanelEvent.Riase();
@@ -64,7 +64,6 @@ public class UIManager : MonoBehaviour
         OnStartShowDownEvent.OnRaiseEvent      += ShowDownCard;
         onEndShowDownEvent.OnRaiseEvent        += HideShowDownCard;
         onHideLosePanelEvent.OnRaiseEvent      += HideLosePanel;
-        onPlayerKilledEvent.OnRaiseEvent       += ShowLosePanel;
     }
 
     private void OnDisable()
@@ -73,6 +72,5 @@ public class UIManager : MonoBehaviour
         OnStartShowDownEvent.OnRaiseEvent       -= ShowDownCard;
         onEndShowDownEvent.OnRaiseEvent         -= HideShowDownCard;
         onHideLosePanelEvent.OnRaiseEvent       -= HideLosePanel;
-        onPlayerKilledEvent.OnRaiseEvent        -= ShowLosePanel;
     }
 }

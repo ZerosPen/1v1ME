@@ -53,7 +53,6 @@ public class PlayerCharacter : Character
     public override void OnDeath()
     {
         OnPlayerKilled.Riase();
-        _PA.PlayDeadAnimation();
     }
 
     private void SetCurrentPlayer()

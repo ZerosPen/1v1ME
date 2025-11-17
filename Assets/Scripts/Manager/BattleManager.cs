@@ -32,6 +32,11 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        MusicManager.instance.PlayMusic("BGM1");
+    }
+
     public void BattleStart(CardSO playerCard, CardSO enemyCard)
     {
         winner = DeciderManager.instance.DicideringCard();

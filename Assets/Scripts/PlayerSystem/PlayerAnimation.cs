@@ -8,6 +8,8 @@ public class PlayerAnimation : MonoBehaviour
 
     [Header("Events")]
     public OnTriggerAttackPlayerEventSO onTriggerAttackPlayerEvent;
+    public OnPlayerKilledSO onPlayerKilledEvent;
+    public OnShowLosePanelEventSO onShowLosePanelEvent;
 
     private void Start()
     {
@@ -22,15 +24,28 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayDeadAnimation()
     {
         _animator.SetBool("isDead", true);
+        StartCoroutine(DelayLosePanel());
+    }
+
+    private IEnumerator DelayLosePanel()
+    {
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+
+        yield return new WaitForSeconds(stateInfo.length);
+        //Raise a event
+        Debug.Log("Dead animation finished!");
+        UIManager.instance.ShowLosePanel();
     }
 
     private void OnEnable()
     {
         onTriggerAttackPlayerEvent.OnRaiseEvent += PlayAttackAnimation;
+        onPlayerKilledEvent.OnRaiseEvent += PlayDeadAnimation;
     }
 
     private void OnDisable()
     {
         onTriggerAttackPlayerEvent.OnRaiseEvent -= PlayAttackAnimation;
+        onPlayerKilledEvent.OnRaiseEvent -= PlayDeadAnimation;
     }
 }

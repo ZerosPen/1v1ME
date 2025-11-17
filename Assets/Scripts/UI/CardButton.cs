@@ -40,6 +40,7 @@ public class CardButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             if (!isSelected)
                 rect.DOScale(hoverScale, tweenTime).SetEase(Ease.OutBack);
+            SoundManager.instance.PlaySound2D("PickUpCard");
         }
         hoverCardButtonEvent.Raise(this);
     }
