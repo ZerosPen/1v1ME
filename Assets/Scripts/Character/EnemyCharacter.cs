@@ -14,6 +14,7 @@ public class EnemyCharacter : Character
 
     [Header("Event")]
     public OnKillEnemyEventSO OnKillEnemyEvent;
+    public OnCanSpawnEventSO OnCanSpawnEvent;
 
     private void Start()
     {
@@ -35,21 +36,20 @@ public class EnemyCharacter : Character
     public override void DealDamage(Character target)
     {
         Debug.Log($"{nameCharacter} is dealing {dealDamage} damage to {target.nameCharacter}");
+        SoundManager.instance.PlaySound2D("hit");
         target.TakeDamage(dealDamage);
     }
 
     public override void OnDeath()
     {
-        if (currentEnemyHandler == null)
-        {
-            SetCurrentEnemy();
-        }
-        else
-        {
-            currentEnemyHandler.SetEnemyKillEventChannel();
-            OnKillEnemyEvent.Raise();
-            Destroy(gameObject);
-        }
+        currentEnemyHandler.SetEnemyKillEventChannel();
+        SoundManager.instance.PlaySound2D("death");
+        OnKillEnemyEvent.Raise();
+    }
+
+    private void CanDestroy()
+    {
+        Destroy(gameObject);
     }
 
     private void SetCurrentEnemy()
@@ -65,5 +65,15 @@ public class EnemyCharacter : Character
         {
             OnDeath();
         }
+    }
+
+    private void OnEnable()
+    {
+        OnCanSpawnEvent.OnRiaseEvent += CanDestroy;
+    }
+
+    private void OnDisable()
+    {
+        OnCanSpawnEvent.OnRiaseEvent -= CanDestroy;
     }
 }

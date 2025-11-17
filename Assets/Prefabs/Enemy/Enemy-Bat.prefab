@@ -256,6 +256,7 @@ MonoBehaviour:
   _animator: {fileID: 7725541416825536584}
   onTriggerAttackEnemyEvent: {fileID: 11400000, guid: b783173538167c746b45cccaaf9983b2, type: 2}
   OnKillEnemyEvent: {fileID: 11400000, guid: 78e039c0d0bd5e44d8e582b765b436c2, type: 2}
+  OnCanSpawnEvent: {fileID: 11400000, guid: ae79c4f26d0d1994684b03770a230744, type: 2}
 --- !u!1 &6087272216725629203
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,3 +556,4 @@ MonoBehaviour:
   _healPointUI: {fileID: 2152028460016843587}
   currentEnemyHandler: {fileID: 0}
   OnKillEnemyEvent: {fileID: 11400000, guid: 78e039c0d0bd5e44d8e582b765b436c2, type: 2}
+  OnCanSpawnEvent: {fileID: 11400000, guid: ae79c4f26d0d1994684b03770a230744, type: 2}

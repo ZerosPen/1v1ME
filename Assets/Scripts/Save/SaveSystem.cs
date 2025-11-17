@@ -54,4 +54,14 @@ public class SaveSystem
         if (SoundSettings.instance != null)
             SoundSettings.instance.Load(_saveData.AudioSettingsData);
     }
+    public static BestScoreSaveData GetBestScore()
+    {
+        Debug.Log("File" + SaveFileName());
+        if (!File.Exists(SaveFileName()))
+            return new BestScoreSaveData(); // default 0
+
+        string json = File.ReadAllText(SaveFileName());
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        return data.BestScoreData;
+    }
 }

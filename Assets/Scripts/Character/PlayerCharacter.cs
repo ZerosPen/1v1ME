@@ -47,11 +47,13 @@ public class PlayerCharacter : Character
     public override void DealDamage(Character target)
     {
         Debug.Log($"{nameCharacter} is dealing {dealDamage} damage to {target.nameCharacter}");
+        SoundManager.instance.PlaySound2D("hit");
         target.TakeDamage(dealDamage);
     }
 
     public override void OnDeath()
     {
+        SoundManager.instance.PlaySound2D("death");
         OnPlayerKilled.Riase();
     }
 

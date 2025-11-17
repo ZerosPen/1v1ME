@@ -14,6 +14,8 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Events")]
     public OnKillEnemyEventSO OnKillEnemyEvent;
+    public OnCanSpawnEventSO OnCanSpawnEvent;
+
 
     private void Awake()
     {
@@ -43,11 +45,11 @@ public class SpawnManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OnKillEnemyEvent.OnRaiseEvent += EnemySpawner;
+        OnCanSpawnEvent.OnRiaseEvent += EnemySpawner;
     }
 
     private void OnDisable()
     {
-        OnKillEnemyEvent.OnRaiseEvent -= EnemySpawner;
+        OnCanSpawnEvent.OnRiaseEvent -= EnemySpawner;
     }
 }
