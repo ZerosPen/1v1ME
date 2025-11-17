@@ -3372,7 +3372,7 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 1759477512022278988, guid: 3f48b868177595d499118198a7c8e6c9, type: 3}
   - {fileID: 8450889969059432226, guid: 1f1c37e5e2549564b9bb62ea5e4fbd34, type: 3}
-  - {fileID: 6763167245201365851, guid: 13c495fbba8be2d4091f60942f322cab, type: 3}
+  - {fileID: 6916725103475478289, guid: 13c495fbba8be2d4091f60942f322cab, type: 3}
 --- !u!1001 &807115584
 PrefabInstance:
   m_ObjectHideFlags: 0

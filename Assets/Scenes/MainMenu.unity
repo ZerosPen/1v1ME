@@ -1171,6 +1171,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[1].groupID
+      value: hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[2].groupID
+      value: death
+      objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[1].clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[2].clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[1].clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 700f170c804f388479cf30b197836d9a, type: 3}
+    - target: {fileID: 7145530568221255186, guid: 4d5d29bceed7ce84889b0e06d7e666b5, type: 3}
+      propertyPath: soundEffects.Array.data[2].clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c12538c56bbe5e4082d945acd79a57d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2429,7 +2457,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1300608709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 204507493}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1300608709
 MonoBehaviour:
   m_ObjectHideFlags: 0

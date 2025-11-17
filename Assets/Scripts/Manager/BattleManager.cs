@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private CardSO _playerCard;
     [SerializeField] private CardSO _enemyCard;
     [SerializeField] private int BestScore;
+    [SerializeField] private bool _canGetScore = true;
 
     [Header("Events")]
     public OnKillEnemyEventSO onKilledEnemyEvent;
@@ -89,8 +90,19 @@ public class BattleManager : MonoBehaviour
 
     public void OnkilledEnemy()
     {
-        killedEnemy++;
-        ScoreManager.instance.AddScore(BestScore);
+       if (_canGetScore)
+        {
+            killedEnemy++;
+            ScoreManager.instance.AddScore(BestScore);
+            _canGetScore = false;
+            StartCoroutine(DelayDefaulting());
+        }
+    }
+
+    private IEnumerator DelayDefaulting()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _canGetScore = true;
     }
 
     private void OnEnable()
