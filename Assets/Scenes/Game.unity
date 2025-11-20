@@ -3316,6 +3316,7 @@ MonoBehaviour:
   _playerCard: {fileID: 0}
   _enemyCard: {fileID: 0}
   BestScore: 2000
+  _canGetScore: 1
   onKilledEnemyEvent: {fileID: 11400000, guid: 78e039c0d0bd5e44d8e582b765b436c2, type: 2}
   endBattleEvent: {fileID: 11400000, guid: f391fedad9db54144a21beb68ffb575b, type: 2}
   onStartShowDownEvent: {fileID: 11400000, guid: 4b8091fb08616ec4b962469174f6606f, type: 2}
@@ -3373,6 +3374,7 @@ MonoBehaviour:
   - {fileID: 1759477512022278988, guid: 3f48b868177595d499118198a7c8e6c9, type: 3}
   - {fileID: 8450889969059432226, guid: 1f1c37e5e2549564b9bb62ea5e4fbd34, type: 3}
   - {fileID: 6916725103475478289, guid: 13c495fbba8be2d4091f60942f322cab, type: 3}
+  - {fileID: 2275601783550833778, guid: 6b4ad61af8f92db47916baee12c1bd76, type: 3}
 --- !u!1001 &807115584
 PrefabInstance:
   m_ObjectHideFlags: 0
